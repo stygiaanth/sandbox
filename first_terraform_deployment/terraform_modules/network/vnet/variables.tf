@@ -22,16 +22,6 @@ variable "rg_name" {
   description = "Resource group for vnet"
 }
 
-variable "subnet" {
-  type = set(object({
-    name = string
-    address_prefix = string
-    security_group = string
-  }))
-  nullable = false
-  description = "Subnet for vnet"
-}
-
 variable "tags" {
   type = map(string)
   nullable = false

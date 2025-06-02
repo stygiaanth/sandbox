@@ -1,0 +1,5 @@
+apiVersion: v2
+name: infra-nginx-ingress-trial-test
+description: A test chart that deploys apps to test nginx-ingress controller
+type: application
+version: 1.0.0

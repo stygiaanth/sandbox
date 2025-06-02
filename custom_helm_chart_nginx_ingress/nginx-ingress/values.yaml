@@ -1,0 +1,23 @@
+replicaCount: 2
+nginx:
+  controller_name: infra-nginx-ingress-trial
+  ingress_name: nginx-trial
+
+image:
+  tag: v1.3.0
+  pull_policy: IfNotPresent
+
+container:
+  restart_policy: Always
+
+service:
+  type: LoadBalancer
+  port: 80
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi

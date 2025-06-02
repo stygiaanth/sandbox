@@ -1,0 +1,5 @@
+namespace:
+  name: nginx-trial-test-apps
+
+ingress:
+  ingress_class_name: nginx-trial

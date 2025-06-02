@@ -25,11 +25,6 @@ module "compute_vnet" {
   location = var.location
   rg_name = azurerm_resource_group.rg_first_terraform_deployment.name
   vnet_address_space = var.compute_vnet_address_space
-  subnet = [{
-    name = var.compute_subnet_name
-    address_prefix = var.compute_subnet_address_prefixes[0]
-    security_group = module.compute_subnet_nsg.nsg_id
-  }]
   tags = var.tags
   depends_on = [ azurerm_resource_group.rg_first_terraform_deployment ]
 }
@@ -59,4 +54,14 @@ module "compute_subnet_nsg" {
   } ]
   tags = var.tags
   depends_on = [ azurerm_resource_group.rg_first_terraform_deployment ]
+}
+
+module "compute_subnet" {
+    source = "./terraform_modules/network/subnet"
+    subnet_name = var.compute_subnet_name
+    subnet_address_prefixes = var.compute_subnet_address_prefixes
+    nsg_id = module.compute_subnet_nsg.nsg_id
+    vnet_name = var.compute_vnet_name
+    rg_name = var.rg_name
+    depends_on = [ module.compute_subnet_nsg, module.compute_vnet ]
 }
